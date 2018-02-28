@@ -13,8 +13,8 @@ class TableList extends Component {
                     <Row>
                         <Col md={12}>
                             <Card
-                                title="Striped Table with Hover"
-                                category="Here is a subtitle for this table"
+                                title="Today's activity"
+                                category="showing history log of plant SC - area G01"
                                 ctTableFullWidth ctTableResponsive
                                 content={
                                     <Table striped hover>
@@ -48,10 +48,45 @@ class TableList extends Component {
                                 }
                             />
                         </Col>
-
-
-                      
-
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <Card
+                                title="Today's activity"
+                                category="showing history log of plant SC - area G02"
+                                ctTableFullWidth ctTableResponsive
+                                content={
+                                    <Table striped hover>
+                                        <thead>
+                                            <tr>
+                                                {
+                                                    thArray.map((prop, key) => {
+                                                        return (
+                                                        <th  key={key}>{prop}</th>
+                                                        );
+                                                    })
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                tdArray.map((prop,key) => {
+                                                    return (
+                                                        <tr key={key}>{
+                                                            prop.map((prop,key)=> {
+                                                                return (
+                                                                    <td  key={key}>{prop}</td>
+                                                                );
+                                                            })
+                                                        }</tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </Table>
+                                }
+                            />
+                        </Col>
                     </Row>
                 </Grid>
             </div>

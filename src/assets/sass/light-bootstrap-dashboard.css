@@ -223,34 +223,20 @@ input:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 4; }
-    .sidebar .logo p {
-      float: left;
-      font-size: 20px;
-      margin: 10px 10px;
-      color: #FFFFFF;
-      line-height: 20px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-    .sidebar .logo a.logo-mini {
-      float: left;
-      text-align: center;
-      width: 30px;
-      margin-right: 15px; }
-      .sidebar .logo a.logo-mini img {
-        width: 40px;
-        margin-left: -3px;
-        display: block;
-        margin-top: 2px; }
-    .sidebar .logo a.logo-normal {
-      display: block; }
     .sidebar .logo .logo-img {
-      width: 34px;
+      width: 200px;
       display: inline-block;
-      height: 34px;
+      height: 70px;
       margin-left: -2px;
       margin-top: -2px;
       margin-right: 10px;
       border-radius: 30px;
       text-align: center; }
+    .sidebar .logo a img {
+      width: 200px;
+      margin-left: -3px;
+      display: block;
+      margin-top: 2px; }
   .sidebar .logo-tim {
     border-radius: 50%;
     border: 1px solid #333;
@@ -449,12 +435,12 @@ body > .navbar-collapse[data-color="purple"]:after {
 
 .sidebar,
 .main-panel {
-  -webkit-transition-property: top,bottom;
-  transition-property: top,bottom;
-  -webkit-transition-duration: .2s,.2s;
-  transition-duration: .2s,.2s;
-  -webkit-transition-timing-function: linear,linear;
-  transition-timing-function: linear,linear;
+  -webkit-transition-property: top, bottom;
+  transition-property: top, bottom;
+  -webkit-transition-duration: .2s, .2s;
+  transition-duration: .2s, .2s;
+  -webkit-transition-timing-function: linear, linear;
+  transition-timing-function: linear, linear;
   -webkit-overflow-scrolling: touch; }
 
 .btn {

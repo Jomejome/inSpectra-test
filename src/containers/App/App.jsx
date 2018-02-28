@@ -25,22 +25,7 @@ class App extends Component {
     }
     handleNotificationClick(position/*, level*/){
         var level = 'success';
-        // switch (color) {
-        //     case 1:
-        //         level = 'success';
-        //         break;
-        //     case 2:
-        //         level = 'warning';
-        //         break;
-        //     case 3:
-        //         level = 'error';
-        //         break;
-        //     case 4:
-        //         level = 'info';
-        //         break;
-        //     default:
-        //         break;
-        // }
+        
         this.state._notificationSystem.addNotification({
             title: (<span data-notify="icon" className="pe-7s-gift"></span>),
             message: (
@@ -73,7 +58,9 @@ class App extends Component {
         if(window.innerWidth < 993 && e.history.location.pathname !== e.location.pathname && document.documentElement.className.indexOf('nav-open') !== -1){
             document.documentElement.classList.toggle('nav-open');
         }
+        
     }
+
     render() {
         return (
 

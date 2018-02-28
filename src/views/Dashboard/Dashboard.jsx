@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
 import ChartistGraph from 'react-chartist';
 import { Grid, Row, Col } from 'react-bootstrap';
-
-
 import {Card} from 'components/Card/Card.jsx';
-import {StatsCard} from 'components/StatsCard/StatsCard.jsx';
-import {Tasks} from 'components/Tasks/Tasks.jsx';
-import {
-    dataPie,
-    legendPie,
-    dataSales,
-    optionsSales,
-    responsiveSales,
-    legendSales,
-    dataBar,
-    optionsBar,
-    responsiveBar,
-    legendBar
-} from 'variables/Variables.jsx';
 
 class Dashboard extends Component {
+
     createLegend(json){
         var legend = [];
         for(var i = 0; i < json["names"].length; i++){
@@ -34,7 +19,22 @@ class Dashboard extends Component {
         }
         return legend;
     }
+
+    state = {
+        curTime : new Date().toLocaleString()
+    }
+
+    componentDidMount() {
+        setInterval( () => {
+          this.setState({
+            curTime : new Date().toLocaleString()
+          })
+        },1000)
+        
+    }
+
     render() {
+        
         return (
             <div className="content">
                 <Grid fluid>
@@ -80,47 +80,71 @@ class Dashboard extends Component {
                         <Col md={8}>
                             <Card
                                 statsIcon="fa fa-history"
-                                id="chartHours"
-                                title="Users Behavior"
-                                category="24 Hours performance"
-                                stats="Updated 3 minutes ago"
+                                id="pca"
+                                title="PCA Output"
+                                category="inspectra-01 inspecting plant SC | area G01"
+                                stats="Updated 2 minutes ago"
                                 content={
-                                    <div className="ct-chart">
-                                        <ChartistGraph
-                                            data={dataSales}
-                                            type="Line"
-                                            options={optionsSales}
-                                            responsiveOptions={responsiveSales}
-                                        />
+                                    <div className="pca1">
+                                       <img src="https://preview.ibb.co/hVTh0x/pca_mock.png" />
                                     </div>
                                     }
-                                legend={
-                                    <div className="legend">
-                                        {this.createLegend(legendSales)}
-                                    </div>
-                                }
+                                // legend={
+                                //     <div className="legend">
+                                //         this is it
+                                //     </div>
+                                // }
+                                // 
                             />
                         </Col>
                         <Col md={4}>
                             <Card
                                 statsIcon="fa fa-clock-o"
-                                title="Email Statistics"
-                                category="Last Campaign Performance"
-                                stats="Campaign sent 2 days ago"
+                                title="Status"
+                                // category="Last Campaign Performance"
+                                stats={this.state.curTime}
                                 content={
-                                    <div id="chartPreferences" className="ct-chart ct-perfect-fourth">
-                                        <ChartistGraph data={dataPie} type="Pie"/>
+                                    <div className="today-stat">
+                                        inspectra-01
+                                        <p>
+                                            run-time: {}
+                                        </p>
+                                        inspectra-02
+                                        <p>
+                                            run-time: {}
+                                        </p>
                                     </div>
                                 }
-                                legend={
-                                    <div className="legend">
-                                        {this.createLegend(legendPie)}
-                                    </div>
-                                }
+                                // legend={
+                                //     <div className="legend">
+                                //         {this.createLegend(legendPie)}
+                                //     </div>
+                                // }
                             />
                         </Col>
                     </Row>
-
+                    <Row>
+                        <Col md={8}>
+                            <Card
+                                statsIcon="fa fa-history"
+                                id="pca"
+                                title="PCA Output"
+                                category="inspectra-02 inspecting plant SC | area G02"
+                                stats="Updated 12 hours ago"
+                                content={
+                                    <div className="pca2">
+                                       <img src="https://preview.ibb.co/hVTh0x/pca_mock.png" />
+                                    </div>
+                                    }
+                                // legend={
+                                //     <div className="legend">
+                                //         this is it
+                                //     </div>
+                                // }
+                                // 
+                            />
+                        </Col>
+                    </Row>
                     {/* <Row>
                         <Col md={6}>
                             <Card
