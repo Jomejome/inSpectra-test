@@ -17,6 +17,7 @@ export class Card extends Component{
                     + (this.props.ctTableUpgrade ? " table-upgrade":"")}>
 
                     {this.props.content}
+                    
 
                     <div className="footer">
                         {this.props.legend}

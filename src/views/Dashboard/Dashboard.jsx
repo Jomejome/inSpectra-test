@@ -2,40 +2,67 @@ import React, { Component } from 'react';
 import ChartistGraph from 'react-chartist';
 import { Grid, Row, Col } from 'react-bootstrap';
 import {Card} from 'components/Card/Card.jsx';
+import axios from 'axios';
+
 
 class Dashboard extends Component {
-
-    createLegend(json){
-        var legend = [];
-        for(var i = 0; i < json["names"].length; i++){
-            var type = "fa fa-circle text-"+json["types"][i];
-            legend.push(
-                <i className={type} key={i}></i>
-            );
-            legend.push(" ");
-            legend.push(
-                json["names"][i]
-            );
+    constructor(props) {
+        super(props)
+        
+        this.state = {
+            curTime : new Date().toLocaleString(),
+            update_seconds: 0,
+            upRate: 5,
+            imgUrl_visible: '',
+            imgUrl_false: '',
+            imgNum: 0
         }
-        return legend;
-    }
 
-    state = {
-        curTime : new Date().toLocaleString()
+        this.updateImg();
+    }
+    updateImg(){
+        axios.get('http://localhost:3003')
+        .then((response) => {
+            var ret = (response.data);
+            ret = ret[ret.length-1]
+            console.log('updateImg');
+            console.log(ret.visible);
+            this.setState({
+
+                imgUrl_visible: ret.visible,
+                imgUrl_false: ret.false
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     componentDidMount() {
+        
         setInterval( () => {
           this.setState({
-            curTime : new Date().toLocaleString()
+            curTime : new Date().toLocaleString(),
+            update_seconds: this.state.update_seconds+1
           })
+           
+            if(this.state.update_seconds > this.state.upRate) {
+                // var res = this.updateImg()
+                
+                this.setState({
+                    update_seconds: 0,
+                })
+                this.updateImg()
+                console.log(this.state.imgUrl_visible)
+            }
+          
         },1000)
-        
     }
 
     render() {
         
         return (
+            
             <div className="content">
                 <Grid fluid>
                     {/* <Row>
@@ -79,22 +106,19 @@ class Dashboard extends Component {
                     <Row>
                         <Col md={8}>
                             <Card
+                                
                                 statsIcon="fa fa-history"
                                 id="pca"
                                 title="PCA Output"
                                 category="inspectra-01 inspecting plant SC | area G01"
-                                stats="Updated 2 minutes ago"
+                                stats={"Updated " + this.state.update_seconds + " second(s) ago"}
                                 content={
-                                    <div className="pca1">
-                                       <img src="https://preview.ibb.co/hVTh0x/pca_mock.png" />
+                                    <div className="plant1">
+                                       <img src={this.state.imgUrl_visible} alt="vis1" width='45%' height='auto'/>
+                                       
+                                       <img src={this.state.imgUrl_false} alt="pca1" width='45%' height='auto'/>
                                     </div>
                                     }
-                                // legend={
-                                //     <div className="legend">
-                                //         this is it
-                                //     </div>
-                                // }
-                                // 
                             />
                         </Col>
                         <Col md={4}>
@@ -115,16 +139,15 @@ class Dashboard extends Component {
                                         </p>
                                     </div>
                                 }
-                                // legend={
-                                //     <div className="legend">
-                                //         {this.createLegend(legendPie)}
-                                //     </div>
-                                // }
+                            
                             />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={8}>
+                           
+                        
+                            
                             <Card
                                 statsIcon="fa fa-history"
                                 id="pca"
@@ -132,61 +155,17 @@ class Dashboard extends Component {
                                 category="inspectra-02 inspecting plant SC | area G02"
                                 stats="Updated 12 hours ago"
                                 content={
-                                    <div className="pca2">
-                                       <img src="https://preview.ibb.co/hVTh0x/pca_mock.png" />
+                                    <div className="pca2" style={{width: '100 px'}}>
+                                       <img src="https://inspectrastorage.blob.core.windows.net/inspectracontainer/y2018_m3_d6_hr15_min32_sec38_visible" width="45%" alt="pca2"/>
+                                       <img src="https://inspectrastorage.blob.core.windows.net/inspectracontainer/y2018_m3_d6_hr15_min32_sec38_false" width="45%" alt="pca2"/>
+                                       
                                     </div>
+                                
                                     }
-                                // legend={
-                                //     <div className="legend">
-                                //         this is it
-                                //     </div>
-                                // }
-                                // 
+                                
                             />
                         </Col>
                     </Row>
-                    {/* <Row>
-                        <Col md={6}>
-                            <Card
-                                id="chartActivity"
-                                title="2014 Sales"
-                                category="All products including Taxes"
-                                stats="Data information certified"
-                                statsIcon="fa fa-check"
-                                content={
-                                    <div className="ct-chart">
-                                        <ChartistGraph
-                                            data={dataBar}
-                                            type="Bar"
-                                            options={optionsBar}
-                                            responsiveOptions={responsiveBar}
-                                        />
-                                    </div>
-                                }
-                                legend={
-                                    <div className="legend">
-                                        {this.createLegend(legendBar)}
-                                    </div>
-                                }
-                            />
-                        </Col>
-
-                        <Col md={6}>
-                            <Card
-                                title="Tasks"
-                                category="Backend development"
-                                stats="Updated 3 minutes ago"
-                                statsIcon="fa fa-history"
-                                content={
-                                    <div className="table-full-width">
-                                        <table className="table">
-                                            <Tasks />
-                                        </table>
-                                    </div>
-                                }
-                            />
-                        </Col>
-                    </Row> */}
 
                 </Grid>
             </div>

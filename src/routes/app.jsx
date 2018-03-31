@@ -1,6 +1,5 @@
 import Dashboard from 'views/Dashboard/Dashboard';
 import Historypage from 'views/History/History';
-import Icons from 'views/Icons/Icons';
 import Notifications from 'views/Notifications/Notifications';
 
 const appRoutes = [

@@ -7,14 +7,18 @@ import imagine from 'assets/img/sidebar-3.jpg';
 import logo from 'assets/img/inSpectra5.png';
 
 import appRoutes from 'routes/app.jsx';
+import NotificationSystem from 'react-notification-system';
+
 
 class Sidebar extends Component{
     constructor(props){
         super(props);
         this.state = {
-            width: window.innerWidth
+            width: window.innerWidth,
+            // _notificationSystem: null
         }
     }
+
     activeRoute(routeName) {
         return this.props.location.pathname.indexOf(routeName) > -1 ? 'active' : '';
     }
@@ -32,7 +36,7 @@ class Sidebar extends Component{
                 <div className="sidebar-background"></div>
                     <div className="logo">
                         <div className="logo-img">
-                            <a href="#/dashboard"><img src={logo} alt="logo_image"/></a>
+                            <a href="#/dashboard"><img src={logo} alt="logo_image" onClick={() => this.props.handleClick ('tc', 'warning', 'gas leak detected!')} /></a>
                         </div>
                     </div>
                 <div className="sidebar-wrapper">

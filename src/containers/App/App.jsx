@@ -23,19 +23,19 @@ class App extends Component {
             _notificationSystem: null
         };
     }
-    handleNotificationClick(position/*, level*/){
-        var level = 'success';
+    handleNotificationClick(position, level, msg){
         
         this.state._notificationSystem.addNotification({
-            title: (<span data-notify="icon" className="pe-7s-gift"></span>),
+            // title: (<span data-notify="icon" className="pe-7s-gift"></span>),
             message: (
                 <div>
-                    this is <b>Notification</b> - testing.
+                    <center><h3>WARNING!</h3></center><br/>
+                    <center>{msg}</center>
                 </div>
             ),
             level: level,
             position: position,
-            autoDismiss: 15,
+            autoDismiss: 0
         });
     }
     componentDidMount(){
@@ -53,6 +53,7 @@ class App extends Component {
             position: "bc",
             autoDismiss: 5,
         });
+
     }
     componentDidUpdate(e){
         if(window.innerWidth < 993 && e.history.location.pathname !== e.location.pathname && document.documentElement.className.indexOf('nav-open') !== -1){
@@ -66,7 +67,7 @@ class App extends Component {
 
                 <div className="wrapper">
                     <NotificationSystem ref="notificationSystem" style={style}/>
-                    <Sidebar {...this.props} />
+                    <Sidebar {...this.props} handleClick={this.handleNotificationClick} />
                     <div id="main-panel" className="main-panel">
                         <Header {...this.props}/>
                             <Switch>
