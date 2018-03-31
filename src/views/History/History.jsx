@@ -6,19 +6,26 @@ import Card from 'components/Card/Card.jsx';
 class TableList extends Component {
     constructor(props) {
         super(props)
-        var tmp = this.updateData();
+        this.updateData();
         this.state = {
-             data: tmp,
-             header: ['Timestamp', 'visible', 'PCA', 'Status']
+            data: [],
+            header: ['Timestamp', 'visible', 'PCA', 'Blob', 'Status']
         }
+        console.log(this.state.data);
     }
     updateData(){
         axios.get('http://localhost:3003')
-        .then(function (response) {
+        .then( (response) => {
             var ret = (response.data);
             console.log('updateData')
             console.log(ret);
-            return ret;
+   
+            this.setState({
+
+                data: ret
+            });
+            console.log("this.state.data");
+            console.log(this.state.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -58,17 +65,17 @@ class TableList extends Component {
                                         </thead>
                                         <tbody>
                                             {
-                                                // this.state.data.map((prop,key) => {
-                                                //     return (
-                                                //         <tr key={key}>{
-                                                //             prop.map((prop,key)=> {
-                                                //                 return (
-                                                //                     <td  key={key}>{prop}</td>
-                                                //                 );
-                                                //             })
-                                                //         }</tr>
-                                                //     )
-                                                // })
+                                                this.state.data.map((prop,key) => { 
+                                                    return (
+                                                        <tr key={key}>
+                                                            <th width='30%'>{prop.timestamp}</th>
+                                                            <th width='20%'><img src={prop.visible} alt="vis" width='90%' height='auto'/></th>
+                                                            <th width='20%'><img src={prop.false} alt="false" width='90%' height='auto'/></th>
+                                                            <th width='15%'> 0 </th>
+                                                            <th width='15%'>Normal</th>
+                                                        </tr>
+                                                    )
+                                                })
                                             }
                                         </tbody>
                                     </Table>
@@ -97,17 +104,13 @@ class TableList extends Component {
                                         </thead>
                                         <tbody>
                                             {
-                                                // tdArray.map((prop,key) => {
-                                                //     return (
-                                                //         <tr key={key}>{
-                                                //             prop.map((prop,key)=> {
-                                                //                 return (
-                                                //                     <td  key={key}>{prop}</td>
-                                                //                 );
-                                                //             })
-                                                //         }</tr>
-                                                //     )
-                                                // })
+                                                <tr>
+                                                    <th>This</th>
+                                                    <th>is</th>
+                                                    <th>a</th>
+                                                    <th>Mock</th>
+                                                    <th>Up</th>
+                                                </tr>
                                             }
                                         </tbody>
                                     </Table>
