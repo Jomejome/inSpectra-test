@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import HeaderLinks from '../Header/HeaderLinks.jsx';
 
-import imagine from 'assets/img/sidebar-3.jpg';
-import logo from 'assets/img/inSpectra5.png';
+import logo from 'assets/img/inSpectra2.png';
 
 import appRoutes from 'routes/app.jsx';
 import NotificationSystem from 'react-notification-system';
@@ -32,7 +31,7 @@ class Sidebar extends Component{
     render(){
 
         return (
-            <div id="sidebar" className="sidebar" data-color="black" data-image={imagine}>
+            <div id="sidebar" className="sidebar" data-color="black" >
                 <div className="sidebar-background"></div>
                     <div className="logo">
                         <div className="logo-img">
