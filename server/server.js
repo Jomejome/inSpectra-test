@@ -27,7 +27,7 @@ mongoose.connect(`mongodb://${config.dbName}:${config.key}@${config.dbName}.docu
 })
 
 
-app.use('*', cors({ origin: 'http://localhost:3000' }))
+app.use('*', cors({ origin: 'http://localhost:5000' }))
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));

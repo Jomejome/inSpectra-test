@@ -11,21 +11,19 @@ class TableList extends Component {
             data: [],
             header: ['Timestamp', 'visible', 'PCA', 'Blob', 'Status']
         }
-        console.log(this.state.data);
     }
     updateData(){
-        axios.get('http://localhost:3003')
+        axios.get('https://inspectra-node.azurewebsites.net/')
         .then( (response) => {
             var ret = (response.data);
-            console.log('updateData')
-            console.log(ret);
+            console.log('updateData')  
+            console.log(ret);           
    
             this.setState({
 
-                data: ret
+                data: ret.reverse()
             });
-            console.log("this.state.data");
-            console.log(this.state.data);
+
         })
         .catch(function (error) {
             console.log(error);
@@ -69,9 +67,9 @@ class TableList extends Component {
                                                     return (
                                                         <tr key={key}>
                                                             <th width='30%'>{prop.timestamp}</th>
-                                                            <th width='20%'><img src={prop.visible} alt="vis" width='90%' height='auto'/></th>
-                                                            <th width='20%'><img src={prop.false} alt="false" width='90%' height='auto'/></th>
-                                                            <th width='15%'> 0 </th>
+                                                            <th width='20%'><img src={prop.visible} alt="vis1" width='90%' height='auto'/></th>
+                                                            <th width='20%'><img src={prop.false} alt="false1" width='90%' height='auto'/></th>
+                                                            <th width='15%'> {prop.blobCount || 0} </th>
                                                             <th width='15%'>Normal</th>
                                                         </tr>
                                                     )

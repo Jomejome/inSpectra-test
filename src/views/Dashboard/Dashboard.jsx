@@ -10,27 +10,34 @@ class Dashboard extends Component {
         super(props)
         
         this.state = {
-            curTime : new Date().toLocaleString(),
+            curTime : new Date(),
             update_seconds: 0,
-            upRate: 5,
+            upRate: 2,
             imgUrl_visible: '',
             imgUrl_false: '',
-            imgNum: 0
+            blobPeak: 0
         }
 
         this.updateImg();
     }
     updateImg(){
-        axios.get('http://localhost:3003')
+        axios.get('https://inspectra-node.azurewebsites.net/')
         .then((response) => {
             var ret = (response.data);
+            var peak;
+            for (var i=0 ; i<ret.length ; i++) {
+                if (!peak || parseInt(ret[i]["blobCount"]) > parseInt(peak))
+                    peak = ret[i]["blobCount"];
+            }
+
             ret = ret[ret.length-1]
             console.log('updateImg');
-            console.log(ret.visible);
+            console.log(ret);
             this.setState({
 
                 imgUrl_visible: ret.visible,
-                imgUrl_false: ret.false
+                imgUrl_false: ret.false,
+                blobPeak: peak
             })
         })
         .catch(function (error) {
@@ -41,19 +48,17 @@ class Dashboard extends Component {
     componentDidMount() {
         
         setInterval( () => {
-          this.setState({
-            curTime : new Date().toLocaleString(),
-            update_seconds: this.state.update_seconds+1
-          })
+            this.setState({
+                curTime : new Date(),
+                update_seconds: this.state.update_seconds+1
+            })
            
             if(this.state.update_seconds > this.state.upRate) {
-                // var res = this.updateImg()
                 
                 this.setState({
                     update_seconds: 0,
                 })
                 this.updateImg()
-                console.log(this.state.imgUrl_visible)
             }
           
         },1000)
@@ -126,17 +131,19 @@ class Dashboard extends Component {
                                 statsIcon="fa fa-clock-o"
                                 title="Status"
                                 // category="Last Campaign Performance"
-                                stats={this.state.curTime}
+                                stats={this.state.curTime.toLocaleString()}
                                 content={
                                     <div className="today-stat">
-                                        inspectra-01
-                                        <p>
-                                            run-time: {}
-                                        </p>
-                                        inspectra-02
-                                        <p>
-                                            run-time: {}
-                                        </p>
+                                        inspectra-01 <br/><br/>
+                                        
+                                            run-time: less than 1 Hour(s) <br/>
+                                            blob peak value: {this.state.blobPeak}
+                                        
+                                            <br/><br/>
+                                        inspectra-02 <br/><br/>
+                                        
+                                            run-time: 37 Hour(s)
+                                        
                                     </div>
                                 }
                             
