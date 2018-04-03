@@ -24,6 +24,7 @@ class TableList extends Component {
                 data: ret.reverse()
             });
 
+
         })
         .catch(function (error) {
             console.log(error);
@@ -70,7 +71,7 @@ class TableList extends Component {
                                                             <th width='20%'><img src={prop.visible} alt="vis1" width='90%' height='auto'/></th>
                                                             <th width='20%'><img src={prop.false} alt="false1" width='90%' height='auto'/></th>
                                                             <th width='15%'> {prop.blobCount || 0} </th>
-                                                            <th width='15%'>Normal</th>
+                                                            <th width='15%'> {status = prop.blobCount > 10? "Abnormal":"Normal"}</th>
                                                         </tr>
                                                     )
                                                 })
